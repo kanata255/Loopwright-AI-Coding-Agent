@@ -1,0 +1,1 @@
+- [user-preference-test-folder](user-preference-test-folder.md) ¡ª User wants generated test cases placed in the test folder
