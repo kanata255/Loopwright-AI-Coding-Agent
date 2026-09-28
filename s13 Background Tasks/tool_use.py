@@ -34,8 +34,9 @@ def safe_path(p: str) -> Path:
     return path
 
 
-def run_bash(command: str) -> str:
+def run_bash(command: str,run_in_background:bool = False) -> str:
     """执行 shell 命令并返回输出。"""
+    # run_in_background 由 agent_loop 调度处理，不在这里处理
     dangerous = ["rm -rf /", "sudo", "shutdown", "reboot", "> /dev/"]
     if any(d in command for d in dangerous):
         return "Error: Dangerous command blocked"
@@ -203,6 +204,17 @@ def run_complete_task(task_id: str) -> str:
     # 传入id完成任务
     return complete_task(task_id)
 
+def execute_tool(block) -> str:
+    """执行工具，返回输出."""
+    handler = TOOL_HANDLERS.get(block.name)
+    try:
+        if handler:
+            output =  handler(**block.input)
+        else:
+            output = f"Unknown tool: {block.name}"
+    except Exception as e:
+        output = f"Error: {e}"
+    return output
 
 from subagent import spawn_subagent
 from load_skill import load_skill
@@ -231,7 +243,10 @@ TOOLS = [
         "description": "Run a shell command.",
         "input_schema": {
             "type": "object",
-            "properties": {"command": {"type": "string"}},
+            "properties": {
+                "command": {"type": "string"},
+                "run_in_background": {"type": "boolean"}
+            },
             "required": ["command"],
         },
     },

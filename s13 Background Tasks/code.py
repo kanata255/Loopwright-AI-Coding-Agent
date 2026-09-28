@@ -12,6 +12,7 @@ from llm import call_llm_with_recovery, CALL_OK, CALL_RETRY, CALL_FINISH
 from prompt import update_context,get_system_prompt
 from context_compact import snip_compact,micro_compact,tool_result_budget,estimate_size,CONTEXT_LIMIT,compact_history
 import token_usage
+from background_tasks import should_run_background,start_background_task,execute_tool,collect_background_results
 
 if sys.platform == "win32":
     os.environ.setdefault("PYTHONUTF8", "1")
@@ -153,38 +154,50 @@ def agent_loop(messages: list,context:dict):
                     "content": str(blocked)
                 })
                 continue
-            handler = TOOL_HANDLERS.get(block.name)
-            try:
-                output = handler(**block.input) if handler else f"Unknown: {block.name}"
-            except Exception as e:
-                output = f"Error: {e}"
-            # 	工具执行后调用
-            trigger_hooks("PostToolUse", block, output)  # s04: post hook
-            # s05: 当调用 todo_write 时重置提醒计数器
-            if block.name == "todo_write": rounds_since_todo = 0
-            results.append(
-                {
+            # s13 background tasks
+            if should_run_background(block.name, block.input):
+                bg_id = start_background_task(block)
+                results.append({
                     "type": "tool_result",
                     "tool_use_id": block.id,
-                    "content": output,
-                }
-            )
+                    "content": f"[Background task {bg_id} started] "
+                        f"Command: {block.input.get('command', '')}. "
+                        f"Result will be available when complete."}
+                )
+            else:
+                output = execute_tool(block)
+                print(str(output)[:300])
+                results.append({"type": "tool_result",
+                                "tool_use_id": block.id,
+                                "content": output}
+                )
+                # 	工具执行后调用
+                trigger_hooks("PostToolUse", block, output)  # s04: post hook
+            # s05: 当调用 todo_write 时重置提醒计数器
+            if block.name == "todo_write": rounds_since_todo = 0
         else:
-            # 正常路径：没有调用压缩
-            messages.append({"role": "user", "content": results})
+            # 正常路径：没有调用压缩，在一条用户消息中注入工具结果和后台通知
+            user_content = list(results)
+            bg_notifications = collect_background_results()
+            if bg_notifications:
+                for notif in bg_notifications:
+                    user_content.append({"type": "text", "text": notif})
+                print(f"  \033[32m[inject] {len(bg_notifications)} background "
+                    f"notification(s)\033[0m")
+            messages.append({"role": "user", "content": user_content})
         # Re-evaluate context and prompt after each tool round
         context = update_context(context, messages)
         system = get_system_prompt(context)
 
 # ── Entry point ──────────────────────────────────────────
 if __name__ == "__main__":
-    print("s12: task system")
+    print("s13: background_tasks")
     print("输入问题，回车发送。输入 q 退出。\n")
     history = []
     context = update_context({},[])
     while True:
         try:
-            query = input("\033[36ms12 >> \033[0m")
+            query = input("\033[36ms13 >> \033[0m")
         except (EOFError, KeyboardInterrupt):
             break
         # 退出agent Loop
