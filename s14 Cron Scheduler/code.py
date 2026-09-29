@@ -1,18 +1,18 @@
-import os
-import sys
+import sys,threading,os,time
 from dotenv import load_dotenv
 from pathlib import Path
 load_dotenv(override=True)
 WORKDIR = Path.cwd()
 from error_recovery import DEFAULT_MAX_TOKENS, RecoveryState
-from tool_use import TOOLS, TOOL_HANDLERS
+from tool_use import TOOLS
 from hooks import trigger_hooks
 from load_skill import SYSTEM as SKILLS_SYSTEM
-from llm import call_llm_with_recovery, CALL_OK, CALL_RETRY, CALL_FINISH
+from llm import call_llm_with_recovery, CALL_RETRY, CALL_FINISH
 from prompt import update_context,get_system_prompt
 from context_compact import snip_compact,micro_compact,tool_result_budget,estimate_size,CONTEXT_LIMIT,compact_history
 import token_usage
 from background_tasks import should_run_background,start_background_task,execute_tool,collect_background_results
+from cron_scheduler import has_cron_queue,consume_cron_queue
 
 if sys.platform == "win32":
     os.environ.setdefault("PYTHONUTF8", "1")
@@ -48,7 +48,7 @@ rounds_since_todo = 0
 :message  消息队列
 :description agent loop循环
 """
-from memory import load_memories,build_system,extract_memories,consolidate_memories
+from memory import load_memories, extract_memories,consolidate_memories
 def agent_loop(messages: list,context:dict):
     """主循环 — 使用组装的系统提示，而不是硬编码的 SYSTEM."""
     system = get_system_prompt(context)
@@ -64,7 +64,7 @@ def agent_loop(messages: list,context:dict):
     while True:
         # s09: 保存压缩前快照以准确提取内存
         pre_compress = [m if isinstance(m, dict) else {"role": m.get("role",""),
-                                                       "content": str(m.get("content",""))} for m in messages]
+                                                "content": str(m.get("content",""))} for m in messages]
         # s08 先进行最大文件落盘 -> 掐头去尾保留中间的数据替换成占位符 ->  压缩
         # L3
         messages[:] = tool_result_budget(messages)
@@ -98,6 +98,16 @@ def agent_loop(messages: list,context:dict):
                 **messages[memory_turn],
                 "content": memories_content + "\n\n" + messages[memory_turn]["content"],
             }
+        
+        # 注入定时器任务
+        fired = consume_cron_queue()
+        for job in fired:
+            messages.append({
+                "role": "user",
+                "content": f"[Scheduled] {job.prompt}"
+            })
+            print(f"  \033[35m[inject cron] {job.prompt[:50]}\033[0m")
+
         # s11: LLM 调用及报错处理已抽到 llm.call_llm_with_recovery
         status, response, max_tokens = call_llm_with_recovery(
             messages,
@@ -189,10 +199,70 @@ def agent_loop(messages: list,context:dict):
         context = update_context(context, messages)
         system = get_system_prompt(context)
 
+
+
+#------------------------scheduler---------------------------------------------------------
+session_history: list = []
+session_context = update_context({}, [])
+
+def queue_processor_loop():
+    """当代理空闲时自动发送已触发的 cron 任务."""
+    global session_context
+    while True:
+        time.sleep(0.2)
+        # 判断有无任务
+        if not has_cron_queue():
+            continue
+        # 尝试非阻塞获取 agent_lock。如果获取失败（说明 agent 正在处理用户输入或其他任务），则跳过，等待下次。
+        if not agent_lock.acquire(blocking=False):
+            continue
+        # 获取锁后，再次检查 cron_queue（双重检查，防止在获取锁的瞬间队列被清空）。
+        try:
+            if not has_cron_queue():
+                continue
+            print("\n  \033[35m[queue processor] 按计划完成工作\033[0m")
+            run_agent_turn_locked()
+        finally:
+            agent_lock.release()
+            
+def run_agent_turn_locked(user_query: str | None = None):
+    """ 运行一个代理回合。调用者必须持有 agent_lock """
+    global session_context
+    if user_query is not None:
+        session_history.append({"role": "user", "content": user_query})
+    agent_loop(session_history, session_context)
+    session_context = update_context(session_context, session_history)
+    print_latest_assistant_text(session_history)
+    # 每次会话结束：统计本次消耗的 token 并重置计数，供下次会话重新累计
+    token_usage.print_usage()
+    token_usage.reset()
+    print()
+    
+def print_latest_assistant_text(messages: list):
+    print("--------------------final content--------------------------")
+    """负责把 agent 的最终文本回复呈现给终端用户。"""
+    if not messages:
+        return
+    msg = messages[-1]
+    if not isinstance(msg, dict) or msg.get("role") != "assistant":
+        return
+    content = msg.get("content", "")
+    if isinstance(content, str):
+        print(content)
+        return
+    for block in content:
+        if getattr(block, "type", None) == "text":
+            print(block.text)
+        elif isinstance(block, dict) and block.get("type") == "text":
+            print(block.get("text", ""))
+            
+agent_lock = threading.Lock()
+
 # ── Entry point ──────────────────────────────────────────
 if __name__ == "__main__":
     print("s13: background_tasks")
     print("输入问题，回车发送。输入 q 退出。\n")
+    threading.Thread(target=queue_processor_loop, daemon=True).start()
     history = []
     context = update_context({},[])
     while True:
@@ -206,17 +276,5 @@ if __name__ == "__main__":
         # 用户输入提交后、进入 LLM 前调用Hooks，输入验证，注入上下文
         trigger_hooks("UserPromptSubmit", query)   # ← 进入 LLM 之前
         history.append({"role": "user", "content": query})
-        agent_loop(history,context)
-        context = update_context(context, history)
-        # agent_loop 结束后，history[-1] 就是 assistant 的最后一条消息。
-        # 遍历其 content block 列表，找到 type=="text" 的 block 并打印，这就是 LLM 的最终答案。
-        # （中间打印的 print1/print2 是工具执行过程，不是最终答案。）
-        response_content = history[-1]["content"]
-        if isinstance(response_content, list):
-            for block in response_content:
-                if getattr(block, "type", None) == "text":
-                    print(f"final====>{block.text}")
-        # 每次会话结束：统计本次消耗的 token 并重置计数，供下次会话重新累计
-        token_usage.print_usage()
-        token_usage.reset()
-        print()
+        with agent_lock:
+            run_agent_turn_locked(query)

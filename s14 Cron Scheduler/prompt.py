@@ -79,7 +79,7 @@ def update_context(context: dict, messages: list) -> dict:
     memories = ""
     # 判断记忆文件还存在不
     if MEMORY_INDEX.exists():
-        content = MEMORY_INDEX.read_text().strip()
+        content = MEMORY_INDEX.read_text(encoding="utf-8").strip()
         if content:
             memories = content
     return {

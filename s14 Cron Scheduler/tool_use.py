@@ -216,6 +216,31 @@ def execute_tool(block) -> str:
         output = f"Error: {e}"
     return output
 
+
+from cron_scheduler import cron_lock ,scheduled_jobs,cancel_job,schedule_job
+# 定时器工具
+def run_schedule_cron(cron: str, prompt: str,
+                recurring: bool = True, durable: bool = True) -> str:
+    result = schedule_job(cron, prompt, recurring, durable)
+    if isinstance(result, str):
+        return f"Error: {result}"
+    return f"Scheduled {result.id}: '{cron}' → {prompt}"
+
+def run_list_crons() -> str:
+    with cron_lock:
+        jobs = list(scheduled_jobs.values())
+    if not jobs:
+        return "No cron jobs. Use schedule_cron to add one."
+    lines = []
+    for j in jobs:
+        tag = "recurring" if j.recurring else "one-shot"
+        dur = "durable" if j.durable else "session"
+        lines.append(f"  {j.id}: '{j.cron}' → {j.prompt[:40]} "
+                f"[{tag}, {dur}]")
+    return "\n".join(lines)
+def run_cancel_cron(job_id: str) -> str:
+    return cancel_job(job_id)
+
 from subagent import spawn_subagent
 from load_skill import load_skill
 
@@ -234,6 +259,9 @@ TOOL_HANDLERS = {
     "get_task": run_get_task,
     "claim_task": run_claim_task,
     "complete_task": run_complete_task,
+    "schedule_cron": run_schedule_cron,
+    "list_crons": run_list_crons,
+    "cancel_cron": run_cancel_cron,
 }
 
 # ── Tool definitions ──────────────────────────────────────
@@ -401,6 +429,47 @@ TOOLS = [
             "type": "object",
             "properties": {"task_id": {"type": "string"}},
             "required": ["task_id"]
+        }
+    },
+    {
+        "name": "schedule_cron",
+        "description": "Schedule a cron job. cron is 5-field: min hour dom month dow.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "cron": {
+                    "type": "string",
+                    "description": "5-field cron expression"
+                },
+                "prompt": {
+                    "type": "string",
+                    "description": "Message to inject when fired"
+                },
+            "recurring": {
+                "type": "boolean",
+                "description": "True=recurring, False=one-shot"
+            },
+            "durable": {
+                "type": "boolean",
+                "description": "True=persist to disk"}
+            },
+            "required": ["cron", "prompt"]}
+    },
+    {
+        "name": "list_crons",
+        "description": "List all registered cron jobs.",
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+            "required": []}
+    },
+    {
+        "name": "cancel_cron",
+        "description": "Cancel a cron job by ID.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"job_id": {"type": "string"}},
+            "required": ["job_id"]
         }
     },
 ]

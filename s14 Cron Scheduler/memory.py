@@ -103,13 +103,13 @@ def _rebuild_index():
         # 排除索引文件
         if f.name == "MEMORY.md":
             continue
-        raw = f.read_text()
+        raw = f.read_text(encoding="utf-8")
         meta, body = _parse_frontmatter(raw)
         name = meta.get("name", f.stem)
         desc = meta.get("description", body.split("\n")[0][:80])
         lines.append(f"- [{name}]({f.name}) — {desc}")
     #  将记忆名称、记忆文件名称 - 记忆描述写入文件
-    MEMORY_INDEX.write_text("\n".join(lines) + "\n" if lines else "")
+    MEMORY_INDEX.write_text("\n".join(lines) + "\n" if lines else "", encoding="utf-8")
 
 def write_memory_file(name: str, mem_type: str, description: str, body: str):
     """
@@ -124,7 +124,8 @@ def write_memory_file(name: str, mem_type: str, description: str, body: str):
     filename = f"{slug}.md"
     filepath = MEMORY_DIR / filename
     filepath.write_text(
-        f"---\nname: {name}\ndescription: {description}\ntype: {mem_type}\n---\n\n{body}\n"
+        f"---\nname: {name}\ndescription: {description}\ntype: {mem_type}\n---\n\n{body}\n",
+        encoding="utf-8",
     )
     # 新建文件后，重构记忆索引
     _rebuild_index()
@@ -134,7 +135,7 @@ def read_memory_index() -> str:
     """读取memory记忆索引"""
     if not MEMORY_INDEX.exists():
         return ""
-    text = MEMORY_INDEX.read_text().strip()
+    text = MEMORY_INDEX.read_text(encoding="utf-8").strip()
     return text if text else ""
 
 def read_memory_file(filename: str) -> str | None:
@@ -142,7 +143,7 @@ def read_memory_file(filename: str) -> str | None:
     path = MEMORY_DIR / filename
     if not path.exists():
         return None
-    return path.read_text()
+    return path.read_text(encoding="utf-8")
 
 def list_memory_files() -> list[dict]:
     """
@@ -153,7 +154,7 @@ def list_memory_files() -> list[dict]:
     for f in sorted(MEMORY_DIR.glob("*.md")):
         if f.name == "MEMORY.md":
             continue
-        raw = f.read_text()
+        raw = f.read_text(encoding="utf-8")
         meta, body = _parse_frontmatter(raw)
         result.append({
             "filename": f.name,
