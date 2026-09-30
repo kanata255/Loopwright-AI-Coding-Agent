@@ -6,7 +6,7 @@
 
 import time,os
 from anthropic import Anthropic, NOT_GIVEN
-from error_recovery import (
+from plan_and_coordination.error_recovery import (
     with_retry,
     is_prompt_too_long_error,
     DEFAULT_MAX_TOKENS,
@@ -86,7 +86,7 @@ def call_llm_with_recovery(messages, request_messages, *, system, tools, state,
         if is_prompt_too_long_error(e):
             # prompt 太长：L5 应急压缩一次后重试
             if not state.has_attempted_reactive_compact:
-                from context_compact import reactive_compact  # 延迟导入，避免循环依赖
+                from memory_management.context_compact import reactive_compact  # 延迟导入，避免循环依赖
                 messages[:] = reactive_compact(messages)
                 state.has_attempted_reactive_compact = True
                 return CALL_RETRY, None, max_tokens

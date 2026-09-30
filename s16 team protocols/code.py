@@ -3,16 +3,16 @@ from dotenv import load_dotenv
 from pathlib import Path
 load_dotenv(override=True)
 WORKDIR = Path.cwd()
-from error_recovery import DEFAULT_MAX_TOKENS, RecoveryState
+from plan_and_coordination.error_recovery import DEFAULT_MAX_TOKENS, RecoveryState
 from tool_use import TOOLS
 from hooks import trigger_hooks
 from load_skill import SYSTEM as SKILLS_SYSTEM
 from llm import call_llm_with_recovery, CALL_RETRY, CALL_FINISH
-from prompt import update_context,get_system_prompt
-from context_compact import snip_compact,micro_compact,tool_result_budget,estimate_size,CONTEXT_LIMIT,compact_history
+from plan_and_coordination.prompt import update_context,get_system_prompt
+from memory_management.context_compact import snip_compact,micro_compact,tool_result_budget,estimate_size,CONTEXT_LIMIT,compact_history
 import token_usage
-from background_tasks import should_run_background,start_background_task,execute_tool,collect_background_results
-from cron_scheduler import has_cron_queue,consume_cron_queue
+from concurrency.background_tasks import should_run_background,start_background_task,execute_tool,collect_background_results
+from concurrency.cron_scheduler import has_cron_queue,consume_cron_queue
 
 if sys.platform == "win32":
     os.environ.setdefault("PYTHONUTF8", "1")
@@ -48,7 +48,7 @@ rounds_since_todo = 0
 :message  消息队列
 :description agent loop循环
 """
-from memory import load_memories, extract_memories,consolidate_memories
+from memory_management.memory import load_memories, extract_memories,consolidate_memories
 def agent_loop(messages: list,context:dict):
     """主循环 — 使用组装的系统提示，而不是硬编码的 SYSTEM."""
     system = get_system_prompt(context)
@@ -261,17 +261,17 @@ def print_latest_assistant_text(messages: list):
             
 agent_lock = threading.Lock()
 
-from agent_team import BUS
+from multi_agent_platform.agent_team import BUS
 # ── Entry point ──────────────────────────────────────────
 if __name__ == "__main__":
-    print("s15: agent teams")
+    print("s16: team protocols")
     print("输入问题，回车发送。输入 q 退出。\n")
     threading.Thread(target=queue_processor_loop, daemon=True).start()
     history = []
     context = update_context({},[])
     while True:
         try:
-            query = input("\033[36ms13 >> \033[0m")
+            query = input("\033[36ms16 >> \033[0m")
         except (EOFError, KeyboardInterrupt):
             break
         # 退出agent Loop

@@ -143,7 +143,7 @@ def _normalize_todos(todos):
 
 
 # task tool
-from task_system import create_task, list_tasks, get_task, claim_task, complete_task
+from multi_agent_platform.task_system import create_task, list_tasks, get_task, claim_task, complete_task
 
 
 def run_create_task(subject: str, description: str = "",
@@ -214,7 +214,7 @@ def execute_tool(block) -> str:
     return output
 
 
-from cron_scheduler import cron_lock ,scheduled_jobs,cancel_job,schedule_job
+from concurrency.cron_scheduler import cron_lock ,scheduled_jobs,cancel_job,schedule_job
 # 定时器工具
 def run_schedule_cron(cron: str, prompt: str,
                 recurring: bool = True, durable: bool = True) -> str:
@@ -238,9 +238,9 @@ def run_list_crons() -> str:
 def run_cancel_cron(job_id: str) -> str:
     return cancel_job(job_id)
 
-from subagent import spawn_subagent
+from plan_and_coordination.subagent import spawn_subagent
 from load_skill import load_skill
-from agent_team import run_check_inbox,run_send_message,run_spawn_teammate
+from multi_agent_platform.agent_team import run_check_inbox,run_send_message,run_spawn_teammate
 TOOL_HANDLERS = {
     "bash": run_bash,
     "read_file": run_read,

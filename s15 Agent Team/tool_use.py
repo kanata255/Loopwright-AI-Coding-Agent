@@ -143,8 +143,7 @@ def _normalize_todos(todos):
 
 
 # task tool
-from task_system import create_task, list_tasks, get_task, claim_task, complete_task
-
+from multi_agent_platform.task_system import create_task, list_tasks, get_task, claim_task, complete_task
 
 def run_create_task(subject: str, description: str = "",
                     blockedBy: list[str] | None = None) -> str:
