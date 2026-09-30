@@ -11,10 +11,7 @@ s02: Tool Use — 在 s01 基础上新增 4 个工具 + 分发映射。
 循环本身（agent_loop）与 s01 完全一致。
 """
 
-import ast
-import json
-import os
-import subprocess
+import os,ast,json,subprocess
 from pathlib import Path
 
 WORKDIR = Path.cwd()
@@ -243,7 +240,7 @@ def run_cancel_cron(job_id: str) -> str:
 
 from subagent import spawn_subagent
 from load_skill import load_skill
-
+from agent_team import run_check_inbox,run_send_message,run_spawn_teammate
 TOOL_HANDLERS = {
     "bash": run_bash,
     "read_file": run_read,
@@ -262,6 +259,9 @@ TOOL_HANDLERS = {
     "schedule_cron": run_schedule_cron,
     "list_crons": run_list_crons,
     "cancel_cron": run_cancel_cron,
+    "spawn_teammate": run_spawn_teammate,
+    "send_message": run_send_message,
+    "check_inbox": run_check_inbox
 }
 
 # ── Tool definitions ──────────────────────────────────────
@@ -472,4 +472,40 @@ TOOLS = [
             "required": ["job_id"]
         }
     },
+    {
+        "name": "spawn_teammate",
+        "description": "Spawn a teammate agent in a background thread.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "role": {"type": "string"},
+                "prompt": {"type": "string"}
+            },
+        "required": ["name", "role", "prompt"]
+        }
+    },
+    {
+        "name": "send_message",
+        "description": "Send a message to a teammate via MessageBus.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "to": {"type": "string"},
+                "content": {"type": "string"}
+            },
+            "required": ["to", "content"]
+        }
+    },
+    {
+        "name": "check_inbox",
+        "description": "Check Lead's inbox for teammate messages.",
+        "input_schema": {
+            "type": "object",
+            "properties": {},
+            "required": []
+        }
+    },
 ]
+
+# ——— agent Teams ————————————————————————————————————————————————

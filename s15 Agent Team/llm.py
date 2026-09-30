@@ -4,8 +4,7 @@
 - call_llm_with_recovery：主循环用，带瞬态重试 + 报错分类处理（prompt 过长 / max_tokens 续写）
 """
 
-import os
-import time
+import time,os
 from anthropic import Anthropic, NOT_GIVEN
 from error_recovery import (
     with_retry,
@@ -17,11 +16,23 @@ from error_recovery import (
 )
 import token_usage
 
-
 client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 
-
+def call_llm_once(messages,system,tools,max_tokens=8000):
+    try:
+        response = client.messages.create(
+            model=MODEL,
+            system=system,
+            messages=messages,
+            tools=tools,
+            max_tokens=max_tokens)
+        token_usage.record(response)
+    except Exception as e:
+        response = ({"role": "assistant", "content": [
+            {"type": "text",
+             "text": f"[Error] {type(e).__name__}: {e}"}]})
+    return response
 def call_llm(messages, caller, *, system=NOT_GIVEN, tools=NOT_GIVEN, max_tokens=8000,
              retry_max=3, **extra):
     """调用 LLM，记录 token 用量并返回 response。失败时最多重试 retry_max 次。

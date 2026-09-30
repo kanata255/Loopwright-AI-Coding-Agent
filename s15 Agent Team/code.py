@@ -63,8 +63,10 @@ def agent_loop(messages: list,context:dict):
     state = RecoveryState()
     while True:
         # s09: 保存压缩前快照以准确提取内存
-        pre_compress = [m if isinstance(m, dict) else {"role": m.get("role",""),
-                                                "content": str(m.get("content",""))} for m in messages]
+        pre_compress = [m if isinstance(m, dict) else {
+            "role": m.get("role",""),
+            "content": str(m.get("content",""))
+        } for m in messages]
         # s08 先进行最大文件落盘 -> 掐头去尾保留中间的数据替换成占位符 ->  压缩
         # L3
         messages[:] = tool_result_budget(messages)
@@ -142,6 +144,7 @@ def agent_loop(messages: list,context:dict):
         for block in response.content:
             if block.type != "tool_use": continue
             print(f"\033[33m> block.name {block.name}\033[0m")
+            # 执行L4落盘
             if block.name == "compact":
                 messages[:] = compact_history(messages)
                 results.append({
@@ -164,7 +167,7 @@ def agent_loop(messages: list,context:dict):
                     "content": str(blocked)
                 })
                 continue
-            # s13 background tasks
+            # 判断是否需要在后台执行，不需要则直接调用工具
             if should_run_background(block.name, block.input):
                 bg_id = start_background_task(block)
                 results.append({
@@ -258,9 +261,10 @@ def print_latest_assistant_text(messages: list):
             
 agent_lock = threading.Lock()
 
+from agent_team import BUS
 # ── Entry point ──────────────────────────────────────────
 if __name__ == "__main__":
-    print("s13: background_tasks")
+    print("s15: agent teams")
     print("输入问题，回车发送。输入 q 退出。\n")
     threading.Thread(target=queue_processor_loop, daemon=True).start()
     history = []
@@ -278,3 +282,15 @@ if __name__ == "__main__":
         history.append({"role": "user", "content": query})
         with agent_lock:
             run_agent_turn_locked(query)
+            
+        # s15 检查收件箱中的队友结果 → 注入到历史记录中
+        inbox = BUS.read_inbox("lead")
+        if inbox:
+            inbox_text = "\n".join(
+                f"From {m['from']}: {m['content'][:200]}" for m in inbox)
+            history.append({
+                "role": "user",
+                "content": f"[Inbox]\n{inbox_text}"
+            })
+            print(f"\n\033[33m[Inbox: {len(inbox)} messages injected]\033[0m")
+        print()
