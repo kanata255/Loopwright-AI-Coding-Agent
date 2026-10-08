@@ -17,6 +17,7 @@ class Task:
     status: str             # pending | in_progress | completed  未完成 | 进行中 | 完成
     owner: str | None       # 认领者
     blockedBy: list[str]    #   依赖列表 A.blockedBy = [B] B执行完毕之后才能执行A
+    worktree: str | None = None  # s18: bound worktree name
     
 def _task_path(task_id: str) -> Path:
     return TASKS_DIR / f"{task_id}.json"

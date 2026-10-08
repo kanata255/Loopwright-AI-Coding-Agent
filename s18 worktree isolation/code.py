@@ -262,17 +262,16 @@ def print_latest_assistant_text(messages: list):
             
 agent_lock = threading.Lock()
 
-from multi_agent_platform.agent_team import BUS
 # ── Entry point ──────────────────────────────────────────
 if __name__ == "__main__":
-    print("s17: 自动认领任务")
+    print(":s18 work tree")
     print("输入问题，回车发送。输入 q 退出。\n")
     threading.Thread(target=queue_processor_loop, daemon=True).start()
     history = []
     context = update_context({},[])
     while True:
         try:
-            query = input("\033[36ms17 >> \033[0m")
+            query = input("\033[36ms18 >> \033[0m")
         except (EOFError, KeyboardInterrupt):
             break
         # 退出agent Loop

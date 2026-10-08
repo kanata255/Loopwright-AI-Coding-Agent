@@ -1,0 +1,9 @@
+{
+  "id": "task_1791448374_7353",
+  "subject": "Alice task: implement feature A in isolated worktree",
+  "description": "Auto-claim this task and work inside your assigned worktree directory only. Report what you changed.",
+  "status": "in_progress",
+  "owner": "alice",
+  "blockedBy": [],
+  "worktree": "alice-feature-a"
+}

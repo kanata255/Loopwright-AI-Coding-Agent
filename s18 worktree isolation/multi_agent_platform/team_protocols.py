@@ -18,14 +18,17 @@ shutdown 响应	                    硬编码 approve=True	                     
 """
 from anthropic import Anthropic
 import os
+from pathlib import Path
+WORKDIR = Path.cwd()
 from multi_agent_platform.autonomous_agents import idle_poll
-from multi_agent_platform.task_system import claim_task,list_tasks,complete_task
+from multi_agent_platform.task_system import claim_task,list_tasks,complete_task,load_task
 client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 from dataclasses import dataclass, field
 import time,random,json,threading
 active_teammates: dict[str, bool] = {}
 from multi_agent_platform.agent_team import BUS
+from multi_agent_platform.worktree_isolation import WORKTREES_DIR
 
 @dataclass
 class ProtocolState:
@@ -127,6 +130,37 @@ def spawn_teammate_thread(name: str, role: str, prompt: str) -> str:
         return False
     def run():
         from tool_use import run_bash, run_read, run_write
+        wt_ctx = {"path": None}
+        def _wt_cwd() -> Path | None:
+            p = wt_ctx["path"]
+            return Path(p) if p else None
+        def _run_bash(command: str) -> str:
+            return run_bash(command, cwd=_wt_cwd())
+        def _run_read(path: str) -> str:
+            return run_read(path, cwd=_wt_cwd())
+        def _run_write(path: str, content: str) -> str:
+            return run_write(path, content, cwd=_wt_cwd())
+        def _run_list_tasks():
+            tasks = list_tasks()
+            if not tasks:
+                return "No tasks."
+            return "\n".join(
+                f"  {t.id}: {t.subject} [{t.status}]"
+                + (f" (wt:{t.worktree})" if t.worktree else "")
+                for t in tasks)
+        def _run_claim_task(task_id: str):
+            result = claim_task(task_id, owner=name)
+            if "Claimed" in result:
+                task = load_task(task_id)
+                if task.worktree:
+                    wt_ctx["path"] = str(WORKTREES_DIR / task.worktree)
+                else:
+                    wt_ctx["path"] = None
+            return result
+        def _run_complete_task(task_id: str):
+            result = complete_task(task_id)
+            wt_ctx["path"] = None
+            return result
         messages = [{"role": "user", "content": prompt}]
         sub_tools = [
             {"name": "bash", "description": "Run a shell command.",
@@ -169,27 +203,16 @@ def spawn_teammate_thread(name: str, role: str, prompt: str) -> str:
                               "properties": {"task_id": {"type": "string"}},
                               "required": ["task_id"]}},
         ]
-        def _run_list_tasks():
-            tasks = list_tasks()
-            if not tasks:
-                return "No tasks."
-            return "\n".join(
-                f"  {t.id}: {t.subject} [{t.status}]"
-                for t in tasks)
-        def _run_claim_task(task_id: str):
-            return claim_task(task_id, owner=name)
-        def _run_complete_task(task_id: str):
-            return complete_task(task_id)
         sub_handlers = {
-            "bash": run_bash, "read_file": run_read, "write_file": run_write,
-            "send_message": lambda to, content: (BUS.send(name, to, content),"Sent")[1],
+            "bash": _run_bash, "read_file": _run_read,
+            "write_file": _run_write,
+            "send_message": lambda to, content: (BUS.send(name, to, content), "Sent")[1],
             "submit_plan": lambda plan: _teammate_submit_plan(name, plan),
             "list_tasks": _run_list_tasks,
             "claim_task": _run_claim_task,
             "complete_task": _run_complete_task,
         }
         while True:
-            # ── 身份再注入（s17 新）──
             if len(messages) <= 3:
                 messages.insert(0, {"role": "user",
                     "content": f"<identity>You are '{name}', role: {role}. "f"Continue your work.</identity>"})

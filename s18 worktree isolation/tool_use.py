@@ -243,6 +243,8 @@ from plan_and_coordination.subagent import spawn_subagent
 from load_skill import load_skill
 from multi_agent_platform.agent_team import run_check_inbox,run_send_message
 from multi_agent_platform.team_protocols import run_spawn_teammate,run_request_shutdown,run_request_plan,run_review_plan
+from multi_agent_platform.worktree_isolation import run_create_worktree,run_remove_worktree,run_keep_worktree
+
 TOOL_HANDLERS = {
     "bash": run_bash,
     "read_file": run_read,
@@ -267,6 +269,9 @@ TOOL_HANDLERS = {
     "request_shutdown": run_request_shutdown,
     "request_plan": run_request_plan,
     "review_plan": run_review_plan,
+    "create_worktree": run_create_worktree,
+    "remove_worktree": run_remove_worktree,
+    "keep_worktree": run_keep_worktree,
 }
 
 # ── Tool definitions ──────────────────────────────────────
@@ -544,6 +549,41 @@ TOOLS = [
             "required": ["request_id", "approve"]
         }
     },
+    # s18 new: worktree tools
+    {
+        "name": "create_worktree",
+        "description": "Create an isolated git worktree with its own branch.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "task_id": {"type": "string"}},
+                "required": ["name"]
+        }
+    },
+    {
+        "name": "remove_worktree",
+        "description": "Remove a worktree. Refuses if uncommitted changes unless discard_changes=true.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"},
+                "discard_changes": {"type": "boolean"}
+            },
+            "required": ["name"]
+        }
+    },
+    {
+        "name": "keep_worktree",
+        "description": "Keep a worktree for manual review.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "name": {"type": "string"}
+            },
+            "required": ["name"]
+        }
+    }
 ]
 
 # ——— agent Teams ————————————————————————————————————————————————
