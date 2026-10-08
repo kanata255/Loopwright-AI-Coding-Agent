@@ -13,8 +13,6 @@ s02: Tool Use — 在 s01 基础上新增 4 个工具 + 分发映射。
 
 import os,ast,json,subprocess
 from pathlib import Path
-from multi_agent_platform.team_protocols import new_request_id,pending_requests,ProtocolState
-from multi_agent_platform.agent_team import BUS
 WORKDIR = Path.cwd()
 
 

@@ -2,6 +2,7 @@ import sys,threading,os,time
 from dotenv import load_dotenv
 from pathlib import Path
 load_dotenv(override=True)
+from multi_agent_platform.team_protocols import consume_lead_inbox
 WORKDIR = Path.cwd()
 from plan_and_coordination.error_recovery import DEFAULT_MAX_TOKENS, RecoveryState
 from tool_use import TOOLS
@@ -264,14 +265,14 @@ agent_lock = threading.Lock()
 from multi_agent_platform.agent_team import BUS
 # ── Entry point ──────────────────────────────────────────
 if __name__ == "__main__":
-    print("s16: team protocols")
+    print("s17: 自动认领任务")
     print("输入问题，回车发送。输入 q 退出。\n")
     threading.Thread(target=queue_processor_loop, daemon=True).start()
     history = []
     context = update_context({},[])
     while True:
         try:
-            query = input("\033[36ms16 >> \033[0m")
+            query = input("\033[36ms17 >> \033[0m")
         except (EOFError, KeyboardInterrupt):
             break
         # 退出agent Loop
@@ -283,14 +284,11 @@ if __name__ == "__main__":
         with agent_lock:
             run_agent_turn_locked(query)
             
-        # s15 检查收件箱中的队友结果 → 注入到历史记录中
-        inbox = BUS.read_inbox("lead")
+        inbox = consume_lead_inbox(route_protocol=True)
         if inbox:
             inbox_text = "\n".join(
-                f"From {m['from']}: {m['content'][:200]}" for m in inbox)
-            history.append({
-                "role": "user",
-                "content": f"[Inbox]\n{inbox_text}"
-            })
-            print(f"\n\033[33m[Inbox: {len(inbox)} messages injected]\033[0m")
+                f"From {m['from']} [{m.get('type', 'message')}]: "
+                f"{m['content'][:200]}" for m in inbox)
+            history.append({"role": "user",
+                            "content": f"[Inbox]\n{inbox_text}"})
         print()

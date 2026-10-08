@@ -149,8 +149,7 @@ def complete_task(task_id: str) -> str:
         3、判断依赖项不为空的，依赖项为空不需要进行解锁
         4、依赖项都完成了的
     """
-    unblocked = [t.subject for t in list_tasks()
-                 if t.status == "pending" and t.blockedBy and can_start(t.id)]
+    unblocked = [t.subject for t in list_tasks() if t.status == "pending" and t.blockedBy and can_start(t.id)]
     print(f"  \033[32m[complete] {task.subject} ?\033[0m")
     # 拼接解解锁任务进消息，让模型知道接下来可以做什么
     msg = f"Completed {task.id} ({task.subject})"

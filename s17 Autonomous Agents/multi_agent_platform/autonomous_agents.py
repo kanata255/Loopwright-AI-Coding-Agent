@@ -1,4 +1,4 @@
-import os,json,time
+import json,time
 
 IDLE_POLL_INTERVAL = 5   # seconds
 IDLE_TIMEOUT = 60         # seconds
@@ -6,7 +6,7 @@ from multi_agent_platform.task_system import claim_task,TASKS_DIR,can_start
 from multi_agent_platform.agent_team import BUS
 
 def scan_unclaimed_tasks() -> list[dict]:
-    """Find pending, unowned tasks with all dependencies completed."""
+    """查找所有依赖项已完成的待处理、未拥有的任务."""
     unclaimed = []
     for f in sorted(TASKS_DIR.glob("task_*.json")):
         task = json.loads(f.read_text())
@@ -18,25 +18,25 @@ def scan_unclaimed_tasks() -> list[dict]:
 
 
 def idle_poll(agent_name: str, messages: list,name: str, role: str) -> str:
-    """Poll for 60s. Return 'work', 'shutdown', or 'timeout'."""
+    """轮询 60 秒。返回 'work'、'shutdown' 或 'timeout'."""
     for _ in range(IDLE_TIMEOUT // IDLE_POLL_INTERVAL):
         time.sleep(IDLE_POLL_INTERVAL)
-        # Check inbox �� dispatch protocol messages first
+        # 先看收件箱
         inbox = BUS.read_inbox(agent_name)
         if inbox:
-            # Check for shutdown_request
             for msg in inbox:
+                # 收到 shutdown_request → 回执 + 返回 "shutdown"
                 if msg.get("type") == "shutdown_request":
                     req_id = msg.get("metadata", {}).get("request_id", "")
                     BUS.send(name, "lead", "Shutting down gracefully.","shutdown_response",{"request_id": req_id, "approve": True})
                     print(f"  \033[35m[protocol] {name} approved shutdown "f"in idle ({req_id})\033[0m")
                     return "shutdown"
-            # Non-protocol inbox: inject and resume work
+            # 不是关机消息，就当普通消息处理
             messages.append({"role": "user",
                 "content": "<inbox>" + json.dumps(inbox) + "</inbox>"})
             print(f"  \033[36m[idle] {name} found inbox messages\033[0m")
             return "work"
-        # Scan task board
+        # 没有消息，再看任务板
         unclaimed = scan_unclaimed_tasks()
         if unclaimed:
             task = unclaimed[0]
@@ -48,4 +48,5 @@ def idle_poll(agent_name: str, messages: list,name: str, role: str) -> str:
                 return "work"
             print(f"  \033[33m[idle] {name} claim failed: " f"{result}\033[0m")
     print(f"  \033[31m[idle] {name} timeout ({IDLE_TIMEOUT}s)\033[0m")
+    # 上层收到 "timeout" 就让队友退出（下班）。
     return "timeout"

@@ -4,6 +4,7 @@ from pathlib import Path
 load_dotenv(override=True)
 WORKDIR = Path.cwd()
 from plan_and_coordination.error_recovery import DEFAULT_MAX_TOKENS, RecoveryState
+from multi_agent_platform.team_protocols import consume_lead_inbox
 from tool_use import TOOLS
 from hooks import trigger_hooks
 from load_skill import SYSTEM as SKILLS_SYSTEM
@@ -282,15 +283,12 @@ if __name__ == "__main__":
         history.append({"role": "user", "content": query})
         with agent_lock:
             run_agent_turn_locked(query)
-            
-        # s15 检查收件箱中的队友结果 → 注入到历史记录中
-        inbox = BUS.read_inbox("lead")
+        
+        inbox = consume_lead_inbox(route_protocol=True)
         if inbox:
             inbox_text = "\n".join(
-                f"From {m['from']}: {m['content'][:200]}" for m in inbox)
-            history.append({
-                "role": "user",
-                "content": f"[Inbox]\n{inbox_text}"
-            })
-            print(f"\n\033[33m[Inbox: {len(inbox)} messages injected]\033[0m")
+                f"From {m['from']} [{m.get('type', 'message')}]: "
+                f"{m['content'][:200]}" for m in inbox)
+            history.append({"role": "user",
+                            "content": f"[Inbox]\n{inbox_text}"})
         print()
