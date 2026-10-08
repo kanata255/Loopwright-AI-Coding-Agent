@@ -13,7 +13,8 @@ s02: Tool Use — 在 s01 基础上新增 4 个工具 + 分发映射。
 
 import os,ast,json,subprocess
 from pathlib import Path
-
+from multi_agent_platform.team_protocols import new_request_id,pending_requests,ProtocolState
+from multi_agent_platform.agent_team import BUS
 WORKDIR = Path.cwd()
 
 
@@ -238,9 +239,11 @@ def run_list_crons() -> str:
 def run_cancel_cron(job_id: str) -> str:
     return cancel_job(job_id)
 
+
 from plan_and_coordination.subagent import spawn_subagent
 from load_skill import load_skill
-from multi_agent_platform.agent_team import run_check_inbox,run_send_message,run_spawn_teammate
+from multi_agent_platform.agent_team import run_check_inbox,run_send_message
+from multi_agent_platform.team_protocols import run_spawn_teammate,run_request_shutdown,run_request_plan,run_review_plan
 TOOL_HANDLERS = {
     "bash": run_bash,
     "read_file": run_read,
@@ -261,7 +264,10 @@ TOOL_HANDLERS = {
     "cancel_cron": run_cancel_cron,
     "spawn_teammate": run_spawn_teammate,
     "send_message": run_send_message,
-    "check_inbox": run_check_inbox
+    "check_inbox": run_check_inbox,
+    "request_shutdown": run_request_shutdown,
+    "request_plan": run_request_plan,
+    "review_plan": run_review_plan,
 }
 
 # ── Tool definitions ──────────────────────────────────────
@@ -504,6 +510,39 @@ TOOLS = [
             "type": "object",
             "properties": {},
             "required": []
+        }
+    },
+    {
+        "name": "request_shutdown",
+        "description": "Request a teammate to shut down gracefully.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"teammate": {"type": "string"}},
+            "required": ["teammate"]
+        }
+    },
+    {
+        "name": "request_plan",
+        "description": "Ask a teammate to submit a plan for review.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "teammate": {"type": "string"},
+                "task": {"type": "string"}},
+                "required": ["teammate", "task"]
+        }
+    },
+    {
+        "name": "review_plan",
+        "description": "Approve or reject a submitted plan by request_id.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "request_id": {"type": "string"},
+                "approve": {"type": "boolean"},
+                "feedback": {"type": "string"}
+            },
+            "required": ["request_id", "approve"]
         }
     },
 ]

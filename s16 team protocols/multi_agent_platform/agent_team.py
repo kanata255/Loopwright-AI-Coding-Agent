@@ -11,7 +11,6 @@ client = Anthropic(base_url=os.getenv("ANTHROPIC_BASE_URL"))
 MODEL = os.environ["MODEL_ID"]
 
 WORKDIR = Path.cwd()
-from tool_use import run_bash,run_read,run_write
 
 # 存储介质：文件系统，每个 Agent 对应一个 .mailboxes/{agent_name}.jsonl 文件
 # 格式：JSONL（每行一条 JSON 消息）
@@ -66,6 +65,7 @@ def spawn_teammate_thread(name: str, role: str, prompt: str) -> str:
               f"Use tools to complete tasks. "
               f"Send results via send_message to 'lead'.")
     def run():
+        from tool_use import run_bash, run_read, run_write
         messages = [{"role": "user", "content": prompt}]
         """
             相比 Lead 的 14 个工具，teammate 只有 4 个：

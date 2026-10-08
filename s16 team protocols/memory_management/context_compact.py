@@ -143,7 +143,7 @@ def collect_tool_results(messages):
 def micro_compact(messages):
     tool_results = collect_tool_results(messages)
     if len(tool_results) <= KEEP_RECENT: return messages   # 如果总共只有 ≤3 个工具结果，全部保留，直接返回。
-    print("【L2】 旧工具调用结果替换成占位符")
+    # print("【L2】 旧工具调用结果替换成占位符")
     for _, _, block in tool_results[:-KEEP_RECENT]:  # 只保留最近KEEP_RECENT条完整工具调用结果，其他的进入循环判断，如果内容的字符长度>120，就替换（阈值 120 非常小，意味着几乎任何实质性的工具结果都会被替换（一个文件名列表都轻松超过 120 字符）。）
         if len(block.get("content", "")) > 120:
             block["content"] = "[Earlier tool result compacted. Re-run if needed.]"   # 告诉模型"这里曾经有个工具结果，被压缩了
@@ -177,7 +177,7 @@ def tool_result_budget(messages, max_bytes=20000):
     blocks = [(i, b) for i, b in enumerate(last["content"]) if isinstance(b, dict) and b.get("type") == "tool_result"]  # 获取最后一条消息里所有 tool_result 块
     total = sum(len(str(b.get("content", ""))) for _, b in blocks) # 计算所有content的总长度
     if total <= max_bytes: return messages
-    print(f"【L3】 大文件落盘开始落盘")
+    # print(f"【L3】 大文件落盘开始落盘")
     ranked = sorted(blocks, key=lambda p: len(str(p[1].get("content", ""))), reverse=True)  # 按体积从大到小排序
     # 优先搬走最大的，目标是用最少的落盘次数把总量降到预算内。
     for _, block in ranked:
@@ -220,7 +220,7 @@ def summarize_history(messages):
 # 编排入口
 def compact_history(messages):
     transcript_path = write_transcript(messages)
-    print(f"【L4】文件落盘地址: {transcript_path}]")
+    # print(f"【L4】文件落盘地址: {transcript_path}]")
     # 让LLM生成摘要
     summary = summarize_history(messages)
     # [Compacted] 前缀：显式告诉模型"这是被压缩后的历史摘要，不是用户新说的话"。
