@@ -26,8 +26,7 @@ PROMPT_SECTIONS = {
         "and update status as you go."
         "For complex sub-problems, use the task tool to spawn a subagent."
     ),
-    "tools": f"Available tools: {', '.join(TOOL_HANDLERS.keys())}."
-            "connect_mcp. MCP tools are prefixed mcp__{server}__{tool}.",
+    "tools": f"Available tools: {', '.join(TOOL_HANDLERS.keys())}.",
     "workspace": f"Working directory: {WORKDIR}",
     "skills": f"Skills available:\n{list_skills()}\nUse load_skill to get full details when needed.",
     "memory": "Relevant memories are injected below when available.",

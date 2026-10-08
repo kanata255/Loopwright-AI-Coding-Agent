@@ -1,0 +1,9 @@
+{
+  "id": "task_1791448374_7871",
+  "subject": "Bob task: implement feature B in isolated worktree",
+  "description": "Auto-claim this task and work inside your assigned worktree directory only. Report what you changed.",
+  "status": "in_progress",
+  "owner": "bob",
+  "blockedBy": [],
+  "worktree": "bob-feature-b"
+}

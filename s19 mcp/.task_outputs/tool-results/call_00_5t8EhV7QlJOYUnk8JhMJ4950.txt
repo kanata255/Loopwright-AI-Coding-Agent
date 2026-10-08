@@ -1,0 +1,1160 @@
+文件夹: \
+主机名:                             LHANG
+任务名:                             \NVIDIA App SelfUpdate_{B2FE1952-0186-46C3-BAEC-A80AA35AC5B8}
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/24 18:40:18
+上次结果:                           0
+创建者:                             NVIDIA Corporation
+要运行的任务:                       "C:\Program Files\NVIDIA Corporation\NVIDIA App\CEF\NVIDIA App.exe" 
+起始于:                             C:\Program Files\NVIDIA Corporation\NVIDIA App
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 72:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           当事件发生时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \OneDrive Per-Machine Standalone Update Task
+下次运行时间:                       2026/9/30 15:27:47
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       1999/11/30 0:00:00
+上次结果:                           267011
+创建者:                             Microsoft Corporation
+要运行的任务:                       C:\Program Files\Microsoft OneDrive\OneDriveStandaloneUpdater.exe 
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 24:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           一次性, 每小时 
+开始时间:                           12:00:00
+开始日期:                           1992/5/1
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           24 小时， 0 分钟
+重复: 截止: 时间:                   无
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \OneDrive Reporting Task-S-1-5-21-2060311397-3077940222-1722106262-1001
+下次运行时间:                       2026/9/30 13:26:16
+模式:                               就绪
+登录状态:                           只使用交互方式
+上次运行时间:                       2026/9/29 13:44:50
+上次结果:                           0
+创建者:                             Microsoft Corporation
+要运行的任务:                       C:\Program Files\Microsoft OneDrive\OneDriveStandaloneUpdater.exe /reporting
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止
+作为用户运行:                       28110
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 02:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           一次性, 每小时 
+开始时间:                           13:26:16
+开始日期:                           2026/9/28
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           24 小时， 0 分钟
+重复: 截止: 时间:                   无
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \OneDrive Startup Task-S-1-5-21-2060311397-3077940222-1722106262-1001
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           只使用交互方式
+上次运行时间:                       2026/9/29 15:31:55
+上次结果:                           0
+创建者:                             Microsoft Corporation
+要运行的任务:                       C:\Program Files\Microsoft OneDrive\26.168.0830.0006\OneDriveLauncher.exe /startInstances
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止
+作为用户运行:                       28110
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 02:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \PlatformExperiencesHelper_Daily
+下次运行时间:                       2026/9/30 14:22:15
+模式:                               就绪
+登录状态:                           只使用交互方式
+上次运行时间:                       2026/9/29 14:25:28
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       C:\Program Files (x86)\Microsoft\Edge\Application\PlatformExperiencesHelper\platform_experiences_helper.exe 
+起始于:                             C:\Program Files (x86)\Microsoft\Edge\Application\PlatformExperiencesHelper
+注释:                               Platform Experiences Helper - PlatformExperiencesHelper_Daily
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       28110
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 00:05:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           14:20:50
+开始日期:                           2026/9/15
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \PlatformExperiencesHelper_Metrics
+下次运行时间:                       2026/9/30 14:21:53
+模式:                               就绪
+登录状态:                           只使用交互方式
+上次运行时间:                       2026/9/29 14:24:13
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       C:\Program Files (x86)\Microsoft\Edge\Application\PlatformExperiencesHelper\platform_experiences_helper.exe --edge-upload-metrics
+起始于:                             C:\Program Files (x86)\Microsoft\Edge\Application\PlatformExperiencesHelper
+注释:                               Platform Experiences Helper - PlatformExperiencesHelper_Metrics
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       28110
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 00:05:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           14:20:50
+开始日期:                           2026/9/15
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \PlatformExperiencesHelper_OnUnlock
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           只使用交互方式
+上次运行时间:                       1999/11/30 0:00:00
+上次结果:                           267011
+创建者:                             N/A
+要运行的任务:                       C:\Program Files (x86)\Microsoft\Edge\Application\PlatformExperiencesHelper\platform_experiences_helper.exe 
+起始于:                             C:\Program Files (x86)\Microsoft\Edge\Application\PlatformExperiencesHelper
+注释:                               Platform Experiences Helper - PlatformExperiencesHelper_OnUnlock
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       28110
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 00:05:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           当事件发生时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \PrintCurrentDate
+下次运行时间:                       2026/9/29 16:27:00
+模式:                               就绪
+登录状态:                           只使用交互方式
+上次运行时间:                       2026/9/29 16:26:02
+上次结果:                           -2147024894
+创建者:                             LHANG\28110
+要运行的任务:                       E:\devTools\PycharmProjects\WelcomeScreen\s14 Cron Scheduler\print_date.bat
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       28110
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 72:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           一次性, 分钟 
+开始时间:                           16:23:00
+开始日期:                           2026/9/29
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           0 小时， 1 分钟
+重复: 截止: 时间:                   无
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+文件夹: \ASUS
+主机名:                             LHANG
+任务名:                             \ASUS\AcPowerNotification
+下次运行时间:                       N/A
+模式:                               正在运行
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:21:54
+上次结果:                           267009
+创建者:                             ASUSTek
+要运行的任务:                       C:\Program Files (x86)\ASUS\ArmouryDevice\dll\AcPowerNotification\AcPowerNotification.exe 
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \ASUS\ArmourySocketServer
+下次运行时间:                       N/A
+模式:                               正在运行
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:21:54
+上次结果:                           267009
+创建者:                             ASUSTek
+要运行的任务:                       C:\Program Files (x86)\ASUS\ArmouryDevice\dll\ArmourySocketServer\ArmourySocketServer.exe 
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \ASUS\Framework Service
+下次运行时间:                       N/A
+模式:                               正在运行
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:21:57
+上次结果:                           267009
+创建者:                             ASUSTek
+要运行的任务:                       C:\Program Files (x86)\ASUS\ArmouryDevice\asus_framework.exe --delay
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \ASUS\NoiseCancelingEngine
+下次运行时间:                       N/A
+模式:                               正在运行
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:21:54
+上次结果:                           267009
+创建者:                             ASUSTek
+要运行的任务:                       C:\Program Files (x86)\ASUS\ArmouryDevice\dll\MBLedSDK\NoiseCancelingEngine.exe 
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \ASUS\P508PowerAgent_sdk
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:21:54
+上次结果:                           -2147024894
+创建者:                             ASUSTek
+要运行的任务:                       C:\Program Files (x86)\ASUS\ArmouryDevice\dll\ShareFromArmouryIII\Mouse\ROG STRIX CARRY\P508PowerAgent.exe 
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+文件夹: \GoogleSystem
+信息: 目前在你的访问级别上不存在任何可用的计划任务。
+
+文件夹: \GoogleUserPEH
+主机名:                             LHANG
+任务名:                             \GoogleUserPEH\RunPlatformExperienceHelper_Daily
+下次运行时间:                       2026/9/30 11:08:17
+模式:                               就绪
+登录状态:                           只使用交互方式
+上次运行时间:                       2026/9/29 11:08:36
+上次结果:                           0
+创建者:                             LHANG\28110
+要运行的任务:                       "C:\Program Files\Google\Chrome\Application\PlatformExperienceHelper\platform_experience_helper.exe" 
+起始于:                             N/A
+注释:                               Runs platform experience helper daily
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       28110
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 00:05:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           11:07:33
+开始日期:                           2026/6/14
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+文件夹: \Microsoft
+信息: 目前在你的访问级别上不存在任何可用的计划任务。
+
+文件夹: \Microsoft\Office
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Actions Server
+下次运行时间:                       2026/9/29 17:00:00
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:31:56
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       C:\Program Files\Microsoft Office\root\VFS\ProgramFilesCommonX64\Microsoft Shared\Office16\ActionsServer\ActionsServer.exe availabilitycheck
+起始于:                             N/A
+注释:                               This task updates the availability states of Windows Actions.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Actions Server
+下次运行时间:                       2026/9/29 17:00:00
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:31:56
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       C:\Program Files\Microsoft Office\root\VFS\ProgramFilesCommonX64\Microsoft Shared\Office16\ActionsServer\ActionsServer.exe availabilitycheck
+起始于:                             N/A
+注释:                               This task updates the availability states of Windows Actions.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           一次性, 每小时 
+开始时间:                           0:00:00
+开始日期:                           2025/1/1
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           1 小时， 0 分钟
+重复: 截止: 时间:                   无
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Automatic Updates 2.0
+下次运行时间:                       2026/9/30 14:44:44
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 16:03:45
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe /frequentupdate SCHEDULEDTASK displaylevel=False
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每周
+开始时间:                           3:00:00
+开始日期:                           2010/12/16
+结束日期:                           N/A
+天:                                 一周中的每一天
+月:                                 每 1 周
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Automatic Updates 2.0
+下次运行时间:                       2026/9/30 12:01:29
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 16:03:45
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe /frequentupdate SCHEDULEDTASK displaylevel=False
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Automatic Updates 2.0
+下次运行时间:                       2026/9/30 5:44:09
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 16:03:45
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe /frequentupdate SCHEDULEDTASK displaylevel=False
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           在空闲时间
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Background Push Maintenance
+下次运行时间:                       2026/9/30 3:11:26
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:21:55
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\vfs\ProgramFilesCommonx64\Microsoft Shared\Office16\opushutil.exe /pushregistration
+起始于:                             N/A
+注释:                               Task is used to periodically update device configuration with Microsoft to ensure the latest apps and features are available on this device
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止
+作为用户运行:                       INTERACTIVE
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 04:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           3:11:26
+开始日期:                           2010/1/1
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Background Push Maintenance
+下次运行时间:                       2026/9/30 3:11:26
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:21:55
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\vfs\ProgramFilesCommonx64\Microsoft Shared\Office16\opushutil.exe /pushregistration
+起始于:                             N/A
+注释:                               Task is used to periodically update device configuration with Microsoft to ensure the latest apps and features are available on this device
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止
+作为用户运行:                       INTERACTIVE
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 04:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office ClickToRun Service Monitor
+下次运行时间:                       2026/9/30 8:22:22
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 9:20:53
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Common Files\Microsoft Shared\ClickToRun\OfficeC2RClient.exe /WatchService
+起始于:                             N/A
+注释:                               This task monitors the state of your Microsoft Office ClickToRunSvc and sends crash and error logs to Microsoft.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 00:30:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           4:00:00
+开始日期:                           2010/12/16
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           24 小时， 0 分钟
+重复: 截止: 时间:                   无
+重复: 截止: 持续时间:               24 小时， 0 分钟
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates
+下次运行时间:                       2026/9/29 19:23:41
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:11:00
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe 
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           2:10:00
+开始日期:                           2017/1/1
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates
+下次运行时间:                       2026/9/29 20:41:06
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:11:00
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe 
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           6:10:00
+开始日期:                           2017/1/1
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates
+下次运行时间:                       2026/9/29 22:09:17
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:11:00
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe 
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           10:10:00
+开始日期:                           2017/1/1
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates
+下次运行时间:                       2026/9/29 18:32:48
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:11:00
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe 
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           14:10:00
+开始日期:                           2017/1/1
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates
+下次运行时间:                       2026/9/29 20:26:45
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:11:00
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe 
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           18:10:00
+开始日期:                           2017/1/1
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates
+下次运行时间:                       2026/9/29 20:22:19
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:11:00
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe 
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           22:10:00
+开始日期:                           2017/1/1
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates Logon
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:37:04
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe /onlogon
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 00:30:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Feature Updates Logon
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:37:04
+上次结果:                           0
+创建者:                             Microsoft Office
+要运行的任务:                       C:\Program Files\Microsoft Office\root\Office16\sdxhelper.exe /onlogon
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can check for feature updates.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Users
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 00:30:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           当事件发生时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Office\Office Performance Monitor
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       1999/11/30 0:00:00
+上次结果:                           267011
+创建者:                             N/A
+要运行的任务:                       C:\Program Files\Microsoft Office\root\VFS\ProgramFilesCommonX64\Microsoft Shared\Office16\operfmon.exe 
+起始于:                             N/A
+注释:                               This task ensures that your Microsoft Office installation can be monitored for performance issues.
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 已禁用
+计划:                               计划数据在此格式中不可用。
+计划类型:                           当事件发生时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+文件夹: \Microsoft\OneCore
+信息: 目前在你的访问级别上不存在任何可用的计划任务。
+
+文件夹: \Microsoft\Windows
+信息: 目前在你的访问级别上不存在任何可用的计划任务。
+
+文件夹: \Microsoft\Windows\.NET Framework
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 16:05:17
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 02:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           仅在请求时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 16:05:17
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 02:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           仅在请求时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 64 Critical
+下次运行时间:                       N/A
+模式:                               已禁用
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/16 4:04:25
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已禁用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 02:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           在空闲时间
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\.NET Framework\.NET Framework NGEN v4.0.30319 Critical
+下次运行时间:                       N/A
+模式:                               已禁用
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/16 4:04:25
+上次结果:                           0
+创建者:                             N/A
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               N/A
+计划任务状态:                       已禁用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       SYSTEM
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 02:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           在空闲时间
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+文件夹: \Microsoft\Windows\AccountHealth
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\AccountHealth\RecoverabilityToastTask
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       2026/9/29 15:22:34
+上次结果:                           -2147221164
+创建者:                             Microsoft Corporation
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               AccountHealth 任务处理程序评估 Microsoft 帐户的状态，并采取任何必要的修复措施
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止
+作为用户运行:                       INTERACTIVE
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 72:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           当事件发生时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+文件夹: \Microsoft\Windows\Active Directory Rights Management Services Client
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\Active Directory Rights Management Services Client\AD RMS Rights Policy Template Management (Automated)
+下次运行时间:                       N/A
+模式:                               已禁用
+登录状态:                           交互方式/后台方式
+上次运行时间:                       1999/11/30 0:00:00
+上次结果:                           267011
+创建者:                             Microsoft Corporation
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               更新用户的 AD RMS 权限策略模板。如果对服务器上模板分发 Web 服务的身份验证失败，此作业不会提供凭据提示。在此情况下，将无失败提示。
+计划任务状态:                       已禁用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Everyone
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           每天 
+开始时间:                           3:00:00
+开始日期:                           2006/11/9
+结束日期:                           N/A
+天:                                 每 1 天
+月:                                 N/A
+重复: 每:                           已禁用
+重复: 截止: 时间:                   已禁用
+重复: 截止: 持续时间:               已禁用
+重复: 如果还在运行，停止:           已禁用
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\Active Directory Rights Management Services Client\AD RMS Rights Policy Template Management (Automated)
+下次运行时间:                       N/A
+模式:                               已禁用
+登录状态:                           交互方式/后台方式
+上次运行时间:                       1999/11/30 0:00:00
+上次结果:                           267011
+创建者:                             Microsoft Corporation
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               更新用户的 AD RMS 权限策略模板。如果对服务器上模板分发 Web 服务的身份验证失败，此作业不会提供凭据提示。在此情况下，将无失败提示。
+计划任务状态:                       已禁用
+空闲时间:                           已禁用
+电源管理:                           
+作为用户运行:                       Everyone
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\Active Directory Rights Management Services Client\AD RMS Rights Policy Template Management (Manual)
+下次运行时间:                       N/A
+模式:                               就绪
+登录状态:                           交互方式/后台方式
+上次运行时间:                       1999/11/30 0:00:00
+上次结果:                           267011
+创建者:                             Microsoft Corporation
+要运行的任务:                       COM 处理程序
+起始于:                             N/A
+注释:                               更新用户的 AD RMS 权限策略模板。如果对服务器上模板分发 Web 服务的身份验证失败，此作业将提供凭据提示。
+计划任务状态:                       已启用
+空闲时间:                           已禁用
+电源管理:                           在电池模式停止, 不用电池启动
+作为用户运行:                       Everyone
+删除没有计划的任务:                 已禁用
+如果运行了 X 小时 X 分钟，停止任务: 01:00:00
+计划:                               计划数据在此格式中不可用。
+计划类型:                           登陆时
+开始时间:                           N/A
+开始日期:                           N/A
+结束日期:                           N/A
+天:                                 N/A
+月:                                 N/A
+重复: 每:                           N/A
+重复: 截止: 时间:                   N/A
+重复: 截止: 持续时间:               N/A
+重复: 如果还在运行，停止:           N/A
+
+文件夹: \Microsoft\Windows\AppID
+主机名:                             LHANG
+任务名:                             \Microsoft\Windows\AppID\PolicyConverter
+下次运行时间:                       N/A
+模式:                               已禁用
+登录状态:                           交互方式/后台方式
+上次运行时间:                       1999/11/30 0:00:00
+上次结果:                           267011
+创建者:                             Microsoft Corporation
+要运行的任务:                       %windir%\system32\a
