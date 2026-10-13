@@ -1,7 +1,6 @@
-from tool_use import TOOLS,TOOL_HANDLERS
 import re
 class MCPClient:
-    """Discovers and calls tools on an MCP server (mock for teaching)."""
+    """在MCP服务器上发现并调用工具."""
     def __init__(self, name: str):
         self.name = name
         self.tools: list[dict] = []
@@ -18,79 +17,77 @@ class MCPClient:
             return handler(**args)
         except Exception as e:
             return f"MCP error: {e}"
+	    
+# 这是一个模块级全局字典，记录所有已连接的 MCP server
 mcp_clients: dict[str, MCPClient] = {}
 _DISALLOWED_CHARS = re.compile(r'[^a-zA-Z0-9_-]')
+
 def normalize_mcp_name(name: str) -> str:
-    """Replace non [a-zA-Z0-9_-] with underscore."""
+    """名称规范化，工具名要拼进 mcp__{server}__{tool} 这个格式"""
     return _DISALLOWED_CHARS.sub('_', name)
+
 def _mock_server_docs():
     client = MCPClient("docs")
     client.register(
         tool_defs=[
-            {"name": "search", "description": "Search documentation. (readOnly)",
-             "inputSchema": {"type": "object",
-                             "properties": {"query": {"type": "string"}},
-                             "required": ["query"]}},
-            {"name": "get_version", "description": "Get API version. (readOnly)",
-             "inputSchema": {"type": "object", "properties": {},
-                             "required": []}},
+            {
+                "name": "search", "description": "Search documentation. (readOnly)",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {"query": {"type": "string"}},
+                    "required": ["query"]
+                }
+            },
+            {
+                "name": "get_version", "description": "Get API version. (readOnly)",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {},
+                    "required": []
+                }
+            },
         ],
         handlers={
             "search": lambda query: f"[docs] Found 3 results for '{query}'",
             "get_version": lambda: "[docs] API v2.1.0",
         })
     return client
+
+# 模拟注册两个工具
 def _mock_server_deploy():
     client = MCPClient("deploy")
     client.register(
         tool_defs=[
-            {"name": "trigger",
-             "description": "Trigger a deployment. (destructive — requires approval in real CC)",
-             "inputSchema": {"type": "object",
-                             "properties": {"service": {"type": "string"}},
-                             "required": ["service"]}},
-            {"name": "status", "description": "Check deployment status. (readOnly)",
-             "inputSchema": {"type": "object",
-                             "properties": {"service": {"type": "string"}},
-                             "required": ["service"]}},
+            {
+                "name": "trigger",
+                "description": "Trigger a deployment. (destructive — requires approval in real CC)",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {"service": {"type": "string"}},
+                    "required": ["service"]
+                }
+            },
+            {
+                "name": "status", "description": "Check deployment status. (readOnly)",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {"service": {"type": "string"}},
+                    "required": ["service"]
+                }
+            },
         ],
         handlers={
             "trigger": lambda service: f"[deploy] Triggered: {service}",
             "status": lambda service: f"[deploy] {service}: running (v1.4.2)",
         })
     return client
+
+# MOCK_SERVERS 注册表
 MOCK_SERVERS = {
     "docs": _mock_server_docs,
     "deploy": _mock_server_deploy,
 }
-def connect_mcp(name: str) -> str:
-    if name in mcp_clients:
-        return f"MCP server '{name}' already connected"
-    factory = MOCK_SERVERS.get(name)
-    if not factory:
-        available = ", ".join(MOCK_SERVERS.keys())
-        return f"Unknown server '{name}'. Available: {available}"
-    mcp_client = factory()
-    mcp_clients[name] = mcp_client
-    tool_names = [t["name"] for t in mcp_client.tools]
-    print(f"  \033[31m[mcp] connected: {name} → {tool_names}\033[0m")
-    return (f"Connected to MCP server '{name}'. "
-            f"Discovered {len(mcp_client.tools)} tools: {', '.join(tool_names)}")
-def assemble_tool_pool() -> tuple[list[dict], dict]:
-    """Assemble builtin tools + all MCP tools into one pool."""
-    tools = list(TOOLS)
-    handlers = dict(TOOL_HANDLERS)
-    for server_name, mcp_client in mcp_clients.items():
-        safe_server = normalize_mcp_name(server_name)
-        for tool_def in mcp_client.tools:
-            safe_tool = normalize_mcp_name(tool_def["name"])
-            prefixed = f"mcp__{safe_server}__{safe_tool}"
-            tools.append({
-                "name": prefixed,
-                "description": tool_def.get("description", ""),
-                "input_schema": tool_def.get("inputSchema", {}),
-            })
-            handlers[prefixed] = (
-                lambda *, c=mcp_client, t=tool_def["name"], **kw: c.call_tool(t, kw))
-    return tools, handlers
+
+
+
 

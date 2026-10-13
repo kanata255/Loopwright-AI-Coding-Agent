@@ -238,10 +238,46 @@ def run_list_crons() -> str:
 def run_cancel_cron(job_id: str) -> str:
     return cancel_job(job_id)
 
+"""————————————————————————————————————————MCP——————————————————————————————————————————————————————————"""
+# 调用 connect_mcp 后立即刷新工具池
+def assemble_tool_pool() -> tuple[list[dict], dict]:
+    """组装统一工具池."""
+    tools = list(TOOLS)
+    handlers = dict(TOOL_HANDLERS)
+    for server_name, mcp_client in mcp_clients.items():
+        safe_server = normalize_mcp_name(server_name)
+        for tool_def in mcp_client.tools:
+            safe_tool = normalize_mcp_name(tool_def["name"])
+            prefixed = f"mcp__{safe_server}__{safe_tool}"
+            print(f"工具名称:{prefixed}")
+            tools.append({
+                "name": prefixed,
+                "description": tool_def.get("description", ""),
+                "input_schema": tool_def.get("inputSchema", {}),
+            })
+            handlers[prefixed] = (
+                lambda *, c=mcp_client, t=tool_def["name"], **kw: c.call_tool(t, kw))
+    return tools, handlers
+
+def connect_mcp(name: str) -> str:
+    if name in mcp_clients:
+        return f"MCP server '{name}' already connected"
+    factory = MOCK_SERVERS.get(name)
+    if not factory:
+        available = ", ".join(MOCK_SERVERS.keys())
+        return f"Unknown server '{name}'. Available: {available}"
+    mcp_client = factory()
+    mcp_clients[name] = mcp_client
+    tool_names = [t["name"] for t in mcp_client.tools]
+    print(f"  \033[31m[mcp] connected: {name} → {tool_names}\033[0m")
+    return (f"Connected to MCP server '{name}'. "
+            f"Discovered {len(mcp_client.tools)} tools: {', '.join(tool_names)}")
+
 def run_connect_mcp(name: str) -> str:
     return connect_mcp(name)
+"""————————————————————————————————————————MCP——————————————————————————————————————————————————————————"""
 
-from multi_agent_platform.mcp import connect_mcp
+from multi_agent_platform.mcp import mcp_clients,MOCK_SERVERS,normalize_mcp_name
 from plan_and_coordination.subagent import spawn_subagent
 from load_skill import load_skill
 from multi_agent_platform.agent_team import run_check_inbox,run_send_message

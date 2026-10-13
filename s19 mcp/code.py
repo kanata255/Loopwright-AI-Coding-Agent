@@ -86,7 +86,16 @@ def agent_loop(messages: list,context:dict):
         if estimate_size(messages) > CONTEXT_LIMIT:
             print("[L4:->auto compact]")
             messages[:] = compact_history(messages)
-        
+            
+        # 注入定时器任务
+        fired = consume_cron_queue()
+        for job in fired:
+            messages.append({
+                "role": "user",
+                "content": f"[Scheduled] {job.prompt}"
+            })
+            print(f"  \033[35m[inject cron] {job.prompt[:50]}\033[0m")
+            
         request_messages = messages
         # 注入最近消息的相关记忆到最后一条数据
         memory_turn = None
@@ -101,15 +110,6 @@ def agent_loop(messages: list,context:dict):
                 **messages[memory_turn],
                 "content": memories_content + "\n\n" + messages[memory_turn]["content"],
             }
-        
-        # 注入定时器任务
-        fired = consume_cron_queue()
-        for job in fired:
-            messages.append({
-                "role": "user",
-                "content": f"[Scheduled] {job.prompt}"
-            })
-            print(f"  \033[35m[inject cron] {job.prompt[:50]}\033[0m")
 
         # s11: LLM 调用及报错处理已抽到 llm.call_llm_with_recovery
         status, response, max_tokens = call_llm_with_recovery(
@@ -264,7 +264,7 @@ agent_lock = threading.Lock()
 
 # ── Entry point ──────────────────────────────────────────
 if __name__ == "__main__":
-    print(":s19 work tree")
+    print(":s19 mcp")
     print("输入问题，回车发送。输入 q 退出。\n")
     threading.Thread(target=queue_processor_loop, daemon=True).start()
     history = []

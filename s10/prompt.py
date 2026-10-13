@@ -60,7 +60,7 @@ def get_system_prompt(context: dict) -> str:
     global _last_context_key, _last_prompt
     key = json.dumps(context, sort_keys=True, ensure_ascii=False, default=str)
     if key == _last_context_key and _last_prompt:
-        print("  \033[90m[cache hit] 命中缓存，prompt未发生变化\033[0m")
+        # print("  \033[90m[cache hit] 命中缓存，prompt未发生变化\033[0m")
         return _last_prompt
     # 重新组装
     _last_context_key = key
