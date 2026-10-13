@@ -240,10 +240,9 @@ def run_cancel_cron(job_id: str) -> str:
 
 """————————————————————————————————————————MCP——————————————————————————————————————————————————————————"""
 # 调用 connect_mcp 后立即刷新工具池
-def assemble_tool_pool() -> tuple[list[dict], dict]:
-    """组装统一工具池."""
+def assemble_tool_pool() -> list[dict]:
+    """组装统一工具池，并把 MCP 工具处理函数同步写入全局 TOOL_HANDLERS."""
     tools = list(TOOLS)
-    handlers = dict(TOOL_HANDLERS)
     for server_name, mcp_client in mcp_clients.items():
         safe_server = normalize_mcp_name(server_name)
         for tool_def in mcp_client.tools:
@@ -255,9 +254,9 @@ def assemble_tool_pool() -> tuple[list[dict], dict]:
                 "description": tool_def.get("description", ""),
                 "input_schema": tool_def.get("inputSchema", {}),
             })
-            handlers[prefixed] = (
+            TOOL_HANDLERS[prefixed] = (
                 lambda *, c=mcp_client, t=tool_def["name"], **kw: c.call_tool(t, kw))
-    return tools, handlers
+    return tools
 
 def connect_mcp(name: str) -> str:
     if name in mcp_clients:

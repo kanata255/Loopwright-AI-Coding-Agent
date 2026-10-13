@@ -5,16 +5,14 @@ load_dotenv(override=True)
 from multi_agent_platform.team_protocols import consume_lead_inbox
 WORKDIR = Path.cwd()
 from plan_and_coordination.error_recovery import DEFAULT_MAX_TOKENS, RecoveryState
-from tool_use import TOOLS
+from tool_use import assemble_tool_pool
 from hooks import trigger_hooks
-from load_skill import SYSTEM as SKILLS_SYSTEM
 from llm import call_llm_with_recovery, CALL_RETRY, CALL_FINISH
 from plan_and_coordination.prompt import update_context,get_system_prompt
 from memory_management.context_compact import snip_compact,micro_compact,tool_result_budget,estimate_size,CONTEXT_LIMIT,compact_history
 import token_usage
 from concurrency.background_tasks import should_run_background,start_background_task,execute_tool,collect_background_results
 from concurrency.cron_scheduler import has_cron_queue,consume_cron_queue
-
 if sys.platform == "win32":
     os.environ.setdefault("PYTHONUTF8", "1")
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
@@ -35,14 +33,6 @@ except ImportError:
 if os.getenv("ANTHROPIC_BASE_URL"):
     os.environ.pop("ANTHROPIC_AUTH_TOKEN", None)
 
-# s07: 拼接 load_skill 构建的 skills SYSTEM，让主 agent 感知可用技能
-SYSTEM = (
-    f"You are a coding agent at {WORKDIR}. "
-    "Before starting any multi-step task, use todo_write to plan your steps. "
-    "Update status as you go."
-    "For complex sub-problems, use the task tool to spawn a subagent.\n\n"
-    f"{SKILLS_SYSTEM}"
-)
 # 最大无操作提示todolist
 rounds_since_todo = 0
 """
@@ -52,6 +42,7 @@ rounds_since_todo = 0
 from memory_management.memory import load_memories, extract_memories,consolidate_memories
 def agent_loop(messages: list,context:dict):
     """主循环 — 使用组装的系统提示，而不是硬编码的 SYSTEM."""
+    tools = assemble_tool_pool()
     system = get_system_prompt(context)
     global rounds_since_todo
     # global SYSTEM
@@ -92,7 +83,7 @@ def agent_loop(messages: list,context:dict):
         for job in fired:
             messages.append({
                 "role": "user",
-                "content": f"[Scheduled] {job.prompt}"
+                    "content": f"[Scheduled] {job.prompt}"
             })
             print(f"  \033[35m[inject cron] {job.prompt[:50]}\033[0m")
             
@@ -116,7 +107,7 @@ def agent_loop(messages: list,context:dict):
             messages,
             request_messages,
             system=system,
-            tools=TOOLS,
+            tools=tools,
             state=state,
             max_tokens=max_tokens,
         )
